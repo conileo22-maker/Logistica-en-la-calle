@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Logística en la calle · 15/9</title>
+<style>
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;background:#0f172a;color:#e2e8f0;padding-bottom:80px}
+  header{background:linear-gradient(135deg,#facc15 0%,#eab308 100%);color:#0f172a;padding:14px 16px 12px;position:sticky;top:0;z-index:10;box-shadow:0 2px 8px rgba(0,0,0,.3)}
+  h1{margin:0 0 2px;font-size:18px;font-weight:800;letter-spacing:-.3px}
+  .sub{font-size:12px;font-weight:600;opacity:.75}
+  .form-btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;margin-top:10px;padding:12px;background:#0f172a;color:#facc15;border:none;border-radius:10px;font-size:14px;font-weight:800;cursor:pointer;text-decoration:none;box-shadow:0 2px 6px rgba(0,0,0,.25)}
+  .form-btn:active{transform:scale(.98)}
+  .search{margin-top:10px;position:relative}
+  .search input{width:100%;padding:11px 12px 11px 38px;border:none;border-radius:10px;background:rgba(15,23,42,.15);color:#0f172a;font-size:15px;font-weight:500;outline:none}
+  .search input::placeholder{color:rgba(15,23,42,.55)}
+  .search svg{position:absolute;left:12px;top:50%;transform:translateY(-50%);width:18px;height:18px;fill:#0f172a;opacity:.6}
+  .filters{display:flex;gap:8px;padding:12px 16px;overflow-x:auto;background:#1e293b;position:sticky;z-index:9;border-bottom:1px solid #334155}
+  .filters::-webkit-scrollbar{display:none}
+  .chip{flex-shrink:0;padding:7px 13px;border-radius:20px;background:#334155;color:#cbd5e1;font-size:13px;font-weight:600;border:none;cursor:pointer;white-space:nowrap;transition:all .15s}
+  .chip.active{background:#facc15;color:#0f172a}
+  .stats{padding:10px 16px;font-size:13px;color:#94a3b8;font-weight:500}
+  .stats b{color:#facc15}
+  .list{padding:0 12px}
+  .card{background:#1e293b;border-radius:14px;padding:14px;margin-bottom:10px;border:1px solid #334155;box-shadow:0 1px 3px rgba(0,0,0,.2)}
+  .card-top{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;margin-bottom:8px}
+  .razon{font-weight:700;font-size:15px;color:#f1f5f9;line-height:1.25;flex:1}
+  .cod{font-size:11px;color:#64748b;font-weight:600;background:#0f172a;padding:3px 7px;border-radius:6px;white-space:nowrap}
+  .dir{font-size:13.5px;color:#cbd5e1;margin-bottom:2px;font-weight:500}
+  .loc{font-size:12px;color:#94a3b8;margin-bottom:10px}
+  .meta{display:grid;grid-template-columns:1fr 1fr;gap:6px 10px;font-size:12px;color:#cbd5e1;padding:8px 0;border-top:1px solid #334155;margin-bottom:10px}
+  .meta div{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .meta span{color:#64748b;font-size:11px;text-transform:uppercase;font-weight:600;letter-spacing:.3px;display:block;margin-bottom:1px}
+  .badges{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px}
+  .badge{font-size:10.5px;padding:3px 8px;border-radius:6px;font-weight:700;text-transform:uppercase;letter-spacing:.3px}
+  .badge.detr{background:#7f1d1d;color:#fecaca}
+  .badge.pas{background:#78350f;color:#fde68a}
+  .badge.prom{background:#14532d;color:#bbf7d0}
+  .badge.cat{background:#334155;color:#cbd5e1}
+  .badge.punt{background:#1e40af;color:#bfdbfe}
+  .actions{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .btn{display:flex;align-items:center;justify-content:center;gap:6px;padding:13px;border:none;border-radius:10px;font-size:14px;font-weight:700;cursor:pointer;text-decoration:none}
+  .btn.go{background:linear-gradient(135deg,#22c55e 0%,#16a34a 100%);color:#fff;box-shadow:0 2px 6px rgba(34,197,94,.35)}
+  .btn.form{background:linear-gradient(135deg,#3b82f6 0%,#2563eb 100%);color:#fff;box-shadow:0 2px 6px rgba(59,130,246,.35)}
+  .btn:active{transform:scale(.98)}
+  .btn svg{width:18px;height:18px;fill:#fff}
+  .empty{text-align:center;padding:40px 20px;color:#64748b;font-size:14px}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>🚚 Logística en la calle</h1>
+  <div class="sub">Salida líderes · 15/09</div>
+  <a class="form-btn" href="https://docs.google.com/forms/d/e/1FAIpQLSfP-q--7yCi1RJB2JJ_csPK-r14c32OkGEza_xG1DnHiK659Q/viewform?usp=header" target="_blank" rel="noopener">
+    📋 Cargar datos en Forms
+  </a>
+  <div class="search">
+    <svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27a6.5 6.5 0 1 0-.7.7l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
+    <input id="q" placeholder="Buscar cliente, dirección, chofer...">
+  </div>
+</header>
+
+<div class="filters" id="filters"></div>
+<div class="stats" id="stats"></div>
+<div class="list" id="list"></div>
+
+<script>
+const DATA = [{"cod": 19311, "razon": "BAEZ BOGADO EULALIO", "dir": "LISANDRO DE LA TORRE 588", "localidad": "MORENO", "chofer": "ALMARAZ", "nchofer": 108, "vendedor": "COYUBACH GISELA", "sup": "Mario", "horario": "09:00 A 13:00", "canal": "ALM/DESP/ROTISERIA", "punt": 3.0, "cat": "Detractor", "lat": -34.62238, "lon": -58.779743}, {"cod": 19313, "razon": "LEAÑO JENNIFER", "dir": "ISLAS MALVINAS 2244", "localidad": "LA REJA", "chofer": "QUIROGA", "nchofer": 111, "vendedor": "PIERONNE CRISTIAN", "sup": "Mario", "horario": "09:00 A 13:00", "canal": "ALM/DESP/ROTISERIA", "punt": 2.0, "cat": "Detractor", "lat": -34.634065, "lon": -58.820562}, {"cod": 111, "razon": "ZHUANG JIE", "dir": "CENTENARIO 1708", "localidad": "MORENO", "chofer": "ROBLES", "nchofer": 118, "vendedor": "DIAZ CAROLINA", "sup": "Martin", "horario": "08:00 A 13:00", "canal": "AUTOSERVICIO", "punt": 3.66666666666667, "cat": "Detractor", "lat": -34.66711, "lon": -58.792525}, {"cod": 11124, "razon": "ANDRETICHE RUBEN", "dir": "LA RABIDA 2015", "localidad": "LA REJA", "chofer": "BELLOCQ J", "nchofer": 104, "vendedor": "BIANCO ENZO", "sup": "Mario", "horario": "09:00 A 14:00", "canal": "ALM/DESP/ROTISERIA", "punt": 3.0, "cat": "Detractor", "lat": -34.649714, "lon": -58.834421}, {"cod": 16389, "razon": "CHEN YUZHI", "dir": "RUTA PROVINCIAL 24 361", "localidad": "GENERAL RODRIGUEZ", "chofer": "IBAX", "nchofer": 120, "vendedor": "GARCIA NICOLAS", "sup": "Martin", "horario": "09:00 A 13:30", "canal": "AUTOSERVICIO", "punt": 1.0, "cat": "Detractor", "lat": -34.597967, "lon": -58.900033}, {"cod": 16948, "razon": "SIERRA RAMONA DEL VALLE", "dir": "ECHEVERRIA 5642", "localidad": "MORENO", "chofer": "BELLOCQ J", "nchofer": 104, "vendedor": "CACERES ABIGAIL", "sup": "Rodrigo", "horario": "08:30 A 13:30", "canal": "KIOSCO DESPENSA", "punt": 2.0, "cat": "Detractor", "lat": -34.615676, "lon": -58.793399}, {"cod": 18967, "razon": "DASSO CLAUDIA LORENA", "dir": "FÉLIX DE AZARA 6617", "localidad": "MORENO", "chofer": "QUIROGA", "nchofer": 111, "vendedor": "IRALA GLORIA", "sup": "Mario", "horario": "08:00 A 13:00", "canal": "ALM/DESP/ROTISERIA", "punt": 3.66666666666667, "cat": "Detractor", "lat": -34.607486, "lon": -58.788107}, {"cod": 19149, "razon": "NADIA", "dir": "SOLANET 619", "localidad": "GENERAL RODRIGUEZ", "chofer": "VALDEZ M", "nchofer": 112, "vendedor": "ARRIETA BELEN", "sup": "Rodrigo", "horario": "08:00 A 13:00", "canal": "KIOSCO/MAXIKIOSCO/K.VENTANA", "punt": 1.0, "cat": "Detractor", "lat": -34.606304, "lon": -58.94238}, {"cod": 4302, "razon": "FLAMENCO NARCISO ANTONIO", "dir": "VUCETICH Y BOULONG SUR MER 1", "localidad": "TRUJUI", "chofer": "ARANDA", "nchofer": 115, "vendedor": "IRALA GLORIA", "sup": "Mario", "horario": "08:30 A 13:30", "canal": "ALM/DESP/ROTISERIA", "punt": 3.8, "cat": "Detractor", "lat": -34.595539, "lon": -58.740478}, {"cod": 4302, "razon": "FLAMENCO NARCISO ANTONIO", "dir": "VUCETICH Y BOULONG SUR MER 1", "localidad": "TRUJUI", "chofer": "ARANDA", "nchofer": 115, "vendedor": "IRALA GLORIA", "sup": "Mario", "horario": "08:30 A 13:30", "canal": "ALM/DESP/ROTISERIA", "punt": 3.25, "cat": "Detractor", "lat": -34.595539, "lon": -58.740478}, {"cod": 13696, "razon": "CONCHA MAMANI NICOLASA", "dir": "GENERAL CONESA 155", "localidad": "MORENO", "chofer": "COLOMBO S", "nchofer": 113, "vendedor": "BIANCO ENZO", "sup": "Mario", "horario": "08:30 A 13:30", "canal": "ALM/DESP/ROTISERIA", "punt": 1.0, "cat": "Detractor", "lat": -34.645148, "lon": -58.851837}, {"cod": 395, "razon": "CESPEDES ADRIAN GREGORIO", "dir": "ALBERDI Y BEETHOVEN 1", "localidad": "MORENO", "chofer": "BELLOCQ J", "nchofer": 104, "vendedor": "AQUINO YANINA", "sup": "Rodrigo", "horario": "09:00 A 14:00", "canal": "ALM/DESP/ROTISERIA", "punt": 3.5, "cat": "Detractor", "lat": -34.664317, "lon": -58.811821}, {"cod": 6178, "razon": "QUEREL DARIO", "dir": "VERDI 7250", "localidad": "TRUJUI", "chofer": "ARANDA", "nchofer": 115, "vendedor": "PERRONE CLAUDIO", "sup": "Mario", "horario": "08:30 A 13:30", "canal": "KIOSCO/MAXIKIOSCO/K.VENTANA", "punt": 3.0, "cat": "Detractor", "lat": -34.607664, "lon": -58.725084}, {"cod": 16972, "razon": "RAMIREZ DIEGO ALEJANDRO", "dir": "LISANDRO DE LA TORRE 1095", "localidad": "MORENO", "chofer": "QUIROGA", "nchofer": 111, "vendedor": "DUFARRENA HERNAN", "sup": "Rodrigo", "horario": "09:00 A 13:00", "canal": "KIOSCO/MAXIKIOSCO/K.VENTANA", "punt": 1.0, "cat": "Detractor", "lat": -34.616749, "lon": -58.784741}, {"cod": 18223, "razon": "DIAZ CLAUDIA SUSANA", "dir": "SAN FRANCISCO DE ASIS 536", "localidad": "FRANCISCO ALVAREZ", "chofer": "COLOMBO S", "nchofer": 113, "vendedor": "CARDOZO MARINA", "sup": "Rodrigo", "horario": "10:00 A 21:00", "canal": "ALM/DESP/ROTISERIA", "punt": 2.0, "cat": "Detractor", "lat": -34.626381, "lon": -58.862035}, {"cod": 19065, "razon": "NADAL EVELIN DAIANA", "dir": "MANUELA PEDRAZA 5341", "localidad": "CUARTEL V", "chofer": "IBAX", "nchofer": 120, "vendedor": "CACERES ABIGAIL", "sup": "Rodrigo", "horario": "09:30 A 23:00", "canal": "ALM/DESP/ROTISERIA", "punt": 3.0, "cat": "Detractor", "lat": -34.575738, "lon": -58.837357}, {"cod": 19088, "razon": "PETROFF AGUSTINA MICAELA", "dir": "HERNANDARIAS 3384", "localidad": "TRUJUI", "chofer": "ARANDA", "nchofer": 115, "vendedor": "MARTINEZ VANESA", "sup": "Mario", "horario": "09:00 A 15:00", "canal": "ALM/DESP/ROTISERIA", "punt": 3.5, "cat": "Detractor", "lat": -34.596196, "lon": -58.751447}, {"cod": 19253, "razon": "LOPVATO JUAN MATEO", "dir": "MANUEL MAZA 2086", "localidad": "TRUJUI", "chofer": "ARANDA", "nchofer": 115, "vendedor": "PERRONE CLAUDIO", "sup": "Mario", "horario": "08:00 A 13:00", "canal": "ALM/DESP/ROTISERIA", "punt": 3.0, "cat": "Detractor", "lat": -34.607356, "lon": -58.726857}, {"cod": 6864, "razon": "MAIDANA LIDIA SUSANA", "dir": "ALFONSINA STORNI 1283", "localidad": "LA REJA", "chofer": "QUIROGA", "nchofer": 111, "vendedor": "PIERONNE CRISTIAN", "sup": "Mario", "horario": "10:30 A 14:00", "canal": "COMIDAS RAPIDAS", "punt": 3.6666666666666665, "cat": "Detractor", "lat": -34.638743, "lon": -58.827214}, {"cod": 10039, "razon": "ZHUANG HUIQIANG", "dir": "LISANDRO DE LA TORRE 477", "localidad": "MORENO", "chofer": "ALMARAZ", "nchofer": 108, "vendedor": "FASSIO CARLOS", "sup": "Martin", "horario": "08:30 A 13:30", "canal": "AUTOSERVICIO", "punt": 3.0, "cat": "Detractor", "lat": -34.624469, "lon": -58.777389}, {"cod": 19088, "razon": "PETROFF AGUSTINA MICAELA", "dir": "HERNANDARIAS 3384", "localidad": "TRUJUI", "chofer": "ARANDA", "nchofer": 115, "vendedor": "MARTINEZ VANESA", "sup": "Mario", "horario": "09:00 A 15:00", "canal": "ALM/DESP/ROTISERIA", "punt": 1.0, "cat": "Detractor", "lat": -34.596196, "lon": -58.751447}, {"cod": 16948, "razon": "SIERRA RAMONA DEL VALLE", "dir": "ECHEVERRIA 5642", "localidad": "MORENO", "chofer": "BELLOCQ J", "nchofer": 104, "vendedor": "CACERES ABIGAIL", "sup": "Rodrigo", "horario": "08:30 A 13:30", "canal": "KIOSCO DESPENSA", "punt": 2.5, "cat": "Detractor", "lat": -34.615676, "lon": -58.793399}, {"cod": 13696, "razon": "CONCHA MAMANI NICOLASA", "dir": "GENERAL CONESA 155", "localidad": "MORENO", "chofer": "COLOMBO S", "nchofer": 113, "vendedor": "BIANCO ENZO", "sup": "Mario", "horario": "08:30 A 13:30", "canal": "ALM/DESP/ROTISERIA", "punt": 3.4, "cat": "Detractor", "lat": -34.645148, "lon": -58.851837}, {"cod": 18417, "razon": "BORDON GEORGINA MAGALI", "dir": "EMILIO MITRE 2543", "localidad": "MORENO", "chofer": "IBAX", "nchofer": 120, "vendedor": "MORANDO JUAN PABLO", "sup": "Rodrigo", "horario": "09:00 A 13:00", "canal": "ALM/DESP/ROTISERIA", "punt": 1.0, "cat": "Detractor", "lat": -34.657853, "lon": -58.789488}, {"cod": 395, "razon": "CESPEDES ADRIAN GREGORIO", "dir": "ALBERDI Y BEETHOVEN 1", "localidad": "MORENO", "chofer": "SCARAFIA", "nchofer": 122, "vendedor": "AQUINO YANINA", "sup": "Rodrigo", "horario": "09:00 A 14:00", "canal": "ALM/DESP/ROTISERIA", "punt": 2.0, "cat": "Detractor", "lat": -34.664317, "lon": -58.811821}, {"cod": 17247, "razon": "JUARES CLAUDIA EDITH", "dir": "ALBERDI 2249", "localidad": "MORENO", "chofer": "ARANDA", "nchofer": 115, "vendedor": "AQUINO YANINA", "sup": "Rodrigo", "horario": "09:00 A 15:00", "canal": "KIOSCO/MAXIKIOSCO/K.VENTANA", "punt": 1.0, "cat": "Detractor", "lat": -34.660583, "lon": -58.810262}, {"cod": 19253, "razon": "LOPVATO JUAN MATEO", "dir": "MANUEL MAZA 2086", "localidad": "TRUJUI", "chofer": "ARANDA", "nchofer": 115, "vendedor": "PERRONE CLAUDIO", "sup": "Mario", "horario": "08:00 A 13:00", "canal": "ALM/DESP/ROTISERIA", "punt": 2.0, "cat": "Detractor", "lat": -34.607356, "lon": -58.726857}, {"cod": 10329, "razon": "ROMERO ADRIANA", "dir": "MARTIN FIERRO 5584 5584", "localidad": "MORENO", "chofer": "SCARAFIA", "nchofer": 122, "vendedor": "COYUBACH GISELA", "sup": "Mario", "horario": "08:30 A 13:30", "canal": "ALM/DESP/ROTISERIA", "punt": 3.0, "cat": "Detractor", "lat": -34.627686, "lon": -58.782856}];
+const FORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLSfP-q--7yCi1RJB2JJ_csPK-r14c32OkGEza_xG1DnHiK659Q/viewform?usp=header";
+
+const filtros = {sup:'todos', localidad:'todas', chofer:'todos', q:''};
+
+const sups = ['todos', ...new Set(DATA.map(c=>c.sup))];
+const locs = ['todas', ...new Set(DATA.map(c=>c.localidad))];
+const chfs = ['todos', ...new Set(DATA.map(c=>c.chofer))].sort();
+
+function renderFiltros(){
+  const f = document.getElementById('filters');
+  const grupos = [
+    {key:'sup', label:'Sup', opts:sups},
+    {key:'localidad', label:'Loc', opts:locs},
+    {key:'chofer', label:'Chofer', opts:chfs},
+  ];
+  let html = '';
+  grupos.forEach(g=>{
+    g.opts.forEach(o=>{
+      const active = filtros[g.key]===o?'active':'';
+      const lbl = o==='todos'||o==='todas' ? g.label+': todos' : o;
+      html += `<button class="chip ${active}" data-k="${g.key}" data-v="${o}">${lbl}</button>`;
+    });
+  });
+  f.innerHTML = html;
+  f.querySelectorAll('.chip').forEach(b=>{
+    b.onclick=()=>{filtros[b.dataset.k]=b.dataset.v;renderFiltros();render();};
+  });
+}
+
+function catBadge(cat){
+  if(!cat) return '';
+  const k = cat.toLowerCase();
+  const cls = k.includes('detr')?'detr':k.includes('pas')?'pas':k.includes('prom')?'prom':'cat';
+  return `<span class="badge ${cls}">${cat}</span>`;
+}
+
+function render(){
+  const q = filtros.q.toLowerCase().trim();
+  const filt = DATA.filter(c=>{
+    if(filtros.sup!=='todos' && c.sup!==filtros.sup) return false;
+    if(filtros.localidad!=='todas' && c.localidad!==filtros.localidad) return false;
+    if(filtros.chofer!=='todos' && c.chofer!==filtros.chofer) return false;
+    if(q){
+      const s = (c.razon+' '+c.dir+' '+c.chofer+' '+c.vendedor+' '+c.localidad+' '+c.cod).toLowerCase();
+      if(!s.includes(q)) return false;
+    }
+    return true;
+  });
+  document.getElementById('stats').innerHTML = `<b>${filt.length}</b> de ${DATA.length} clientes`;
+  const list = document.getElementById('list');
+  if(!filt.length){ list.innerHTML = '<div class="empty">Sin resultados</div>'; return; }
+  list.innerHTML = filt.map(c=>{
+    const puntBadge = c.punt!=null ? `<span class="badge punt">⭐ ${c.punt.toFixed(1)}</span>` : '';
+    const url = `https://www.google.com/maps/dir/?api=1&destination=${c.lat},${c.lon}&travelmode=driving`;
+    return `
+    <div class="card">
+      <div class="card-top">
+        <div class="razon">${c.razon}</div>
+        <div class="cod">#${c.cod}</div>
+      </div>
+      <div class="dir">📍 ${c.dir}</div>
+      <div class="loc">${c.localidad} · ${c.horario}</div>
+      <div class="badges">${catBadge(c.cat)}${puntBadge}<span class="badge cat">${c.canal}</span></div>
+      <div class="meta">
+        <div><span>Chofer</span>${c.chofer} (#${c.nchofer})</div>
+        <div><span>Supervisor</span>${c.sup}</div>
+        <div style="grid-column:1/-1"><span>Vendedor</span>${c.vendedor}</div>
+      </div>
+      <div class="actions">
+        <a class="btn go" href="${url}" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24"><path d="M12 2L4.5 20.29l.71.71L12 18l6.79 3 .71-.71z"/></svg>
+          Ir con Maps
+        </a>
+        <a class="btn form" href="${FORM_URL}" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+          Cargar Forms
+        </a>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+document.getElementById('q').oninput = e=>{filtros.q=e.target.value;render();};
+renderFiltros();
+render();
+
+window.addEventListener('load',()=>{
+  const h = document.querySelector('header').offsetHeight;
+  document.querySelector('.filters').style.top = h+'px';
+});
+</script>
+</body>
+</html>
